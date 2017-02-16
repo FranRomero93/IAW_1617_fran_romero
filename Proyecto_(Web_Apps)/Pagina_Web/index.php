@@ -1,3 +1,7 @@
+<?php
+      session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +33,14 @@
 <div class="container">
     <div class="cabecera">
         <div class="ini-ses">
-            <p><a href="inicio_sesion.php">Iniciar Sesión</a></p>
+            <?php
+                if (!isset($_SESSION["user"])){
+                    echo "<p class='sesion'><a href='inicio_sesion.php'>Iniciar Sesión</a></p>";
+                } else {
+                    $user=$_SESSION["user"];
+                    echo "<p class='sesion'>Hola, $user ! | <a href='library.php'>Cerrar Sesion</a></p>";
+                }
+            ?>
         </div>
         <div class="titulo">
             <h1>Biblioteca Virtual</h1>
@@ -72,6 +83,7 @@
         
     </div>
 </div>
-
+<php>
+session_destroy();</php>
 </body>
 </html>

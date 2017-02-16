@@ -16,11 +16,12 @@
     overflow: auto;
 }
 
-.ini-ses p {
+.sesion {
     height: 20px;
-    width: 100px;
+    width: 300px;
     margin: 0px;
     float: right;
+    text-align: right;
 }
 
 .titulo h1 {

@@ -22,8 +22,18 @@
             <h1>Biblioteca Virtual</h1>
         </div>
         
-        <?php
-            if (isset($_POST["user"])) {
+        <div class="formulario">
+            <form action="inicio_sesion.php" method="post">
+
+              <p>Nombre de usuario: <input name="user" required></p>
+              <p>Contraseña: <input name="password" type="password" required></p>
+              <p><input type="submit" value="login"></p>
+
+            </form>
+        </div>
+        
+        <?php if (isset($_POST["user"])) {
+    
                   //CREATING THE CONNECTION
                   $connection = new mysqli("localhost", "user", "2asirtriana", "biblioteca");
 
@@ -53,17 +63,6 @@
                 }
             }
         ?>
-        
-        <div class="formulario">
-            <form action="inicio_sesion.php" method="post">
-
-              <p>Nombre de usuario: <input name="user" required></p>
-              <p>Contraseña: <input name="password" type="password" required></p>
-              <p><input type="submit" value="login"></p>
-
-            </form>
-        </div>
-
     </div>
     
 </body>
