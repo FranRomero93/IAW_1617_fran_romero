@@ -3,13 +3,15 @@
     overflow: auto;
     width: 900px;
     background-color: lightgrey;
+    margin: auto;
 }
 
 .cabecera {
     overflow: auto;
     padding: 5px 0px;
     width: 900px;
-    background-color: dodgerblue;
+    background-image: url('../img/cabecera.jpg');
+    background-size: auto;
 }
 
 .ini-ses {

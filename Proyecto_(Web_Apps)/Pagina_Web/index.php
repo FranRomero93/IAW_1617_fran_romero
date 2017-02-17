@@ -15,7 +15,7 @@
       <script type="text/javascript" src="js/modernizr.js"></script>
       <script type="text/javascript" src="js/responsee.js"></script>
 </head>
-<body>
+<body style="background-image: url('img/fondo.jpg')">
 
 <?php
 
@@ -35,10 +35,10 @@
         <div class="ini-ses">
             <?php
                 if (!isset($_SESSION["user"])){
-                    echo "<p class='sesion'><a href='inicio_sesion.php'>Iniciar Sesión</a></p>";
+                    echo "<p class='sesion'><a href='inicio_sesion.php'>Iniciar Sesión</a> | <a href=registro.php'>Registrarte</a></p>";
                 } else {
                     $user=$_SESSION["user"];
-                    echo "<p class='sesion'>Hola, $user ! | <a href='library.php'>Cerrar Sesion</a></p>";
+                    echo "<p class='sesion'>Hola, $user ! | <a href=cerrar_sesion.php>Cerrar Sesion</a></p>";
                 }
             ?>
         </div>
@@ -83,7 +83,5 @@
         
     </div>
 </div>
-<php>
-session_destroy();</php>
 </body>
 </html>
