@@ -5,12 +5,8 @@
   <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width" />
       <link rel="stylesheet" href="css/styles-ini.css">
-      <link rel="stylesheet" href="">    
-      <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href=""> 
       <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-      <script type="text/javascript" src="js/jquery-ui.min.js"></script>    
-      <script type="text/javascript" src="js/modernizr.js"></script>
-      <script type="text/javascript" src="js/responsee.js"></script>
     
     <?php
       session_start();
@@ -42,7 +38,7 @@
                       printf("Connection failed: %s\n", $connection->connect_error);
                       exit();
                   }
-                $consulta="select * from usuario where
+                $consulta="select * from usuarios where
           nombre='".$_POST["user"]."' and password=md5('".$_POST["password"]."');";
         
                 if ($result = $connection->query($consulta)) {

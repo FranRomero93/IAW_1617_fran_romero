@@ -9,11 +9,7 @@
   <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width" />
       <link rel="stylesheet" href="css/styles-index.css?asdas"> 
-      <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
       <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-      <script type="text/javascript" src="js/jquery-ui.min.js"></script>    
-      <script type="text/javascript" src="js/modernizr.js"></script>
-      <script type="text/javascript" src="js/responsee.js"></script>
 </head>
 <body style="background-image: url('img/fondo.jpg')">
 
@@ -35,7 +31,7 @@
         <div class="ini-ses">
             <?php
                 if (!isset($_SESSION["user"])){
-                    echo "<p class='sesion'><a href='inicio_sesion.php'>Iniciar Sesión</a> | <a href=registro.php'>Registrarte</a></p>";
+                    echo "<p class='sesion'><a href='inicio_sesion.php'>Iniciar Sesión</a> | <a href=registro.php>Registrarte</a></p>";
                 } else {
                     $user=$_SESSION["user"];
                     echo "<p class='sesion'>Hola, $user ! | <a href=cerrar_sesion.php>Cerrar Sesion</a></p>";
@@ -49,9 +45,16 @@
     
     <div class="navegacion">
         <div class="novedades"><p>Novedades</p></div>
-        <div class="categorias"><p>Categorias</p></div>
-        <div class="autores"><p>Autores</p></div>
-        <div class="contacto"><p>Contacto</p></div>
+        <div class="categorias"><a class='simple' href='administracion.php'><p>Categorias</p></a></div>
+        <div class="autores"><a class='simple' href='administracion.php'><p>Autores</p></a></div>
+        <div class="contacto"><a class='simple' href='administracion.php'><p>Contacto</p></a></div>
+        
+        <?php
+            if (isset($_SESSION["user"])){
+                echo "<div class='administracion'><a class='simple' href='administracion.php'><p>Administración</p></a></div>";
+            }
+        ?>
+        
     </div>
     
     <div class="contenido">

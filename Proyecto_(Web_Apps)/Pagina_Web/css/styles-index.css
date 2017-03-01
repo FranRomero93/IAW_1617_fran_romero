@@ -45,6 +45,11 @@
     text-align: center;
 }
 
+.simple {
+    color: black;
+    text-decoration: none;
+}
+
 .novedades {
     float: left;
     width: 100px;
@@ -84,6 +89,17 @@
 }
 
 .contacto:hover {
+    background-color: dodgerblue;
+    cursor: hand;
+    cursor: pointer;
+}
+
+.administracion {
+    float: left;
+    width: 100px;
+}
+
+.administracion:hover {
     background-color: dodgerblue;
     cursor: hand;
     cursor: pointer;
