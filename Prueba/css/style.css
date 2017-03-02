@@ -1,0 +1,34 @@
+body {
+    background: url(../img/fondo-gen.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+html,body{
+
+height:100%;
+
+}
+
+.background {
+    background-color: aliceblue;
+    height: 100%;
+}
+
+.header {
+    overflow-y: auto;
+}
+
+.header h1 {
+    float:left;
+    padding: 2px;
+    overflow-x: auto;
+}
+
+content-login {
+    height: 600px;
+}
+
+

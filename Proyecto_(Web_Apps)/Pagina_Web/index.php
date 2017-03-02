@@ -15,22 +15,32 @@
 
 <?php
 
-      //CREATING THE CONNECTION
-      $connection = new mysqli("localhost", "user", "2asirtriana", "biblioteca");
+    //CREATING THE CONNECTION
+    $connection = new mysqli("localhost", "user", "2asirtriana", "biblioteca");
 
-      //TESTING IF THE CONNECTION WAS RIGHT
-      if ($connection->connect_errno) {
-          printf("Connection failed: %s\n", $connection->connect_error);
-          exit();
-      }
+    //TESTING IF THE CONNECTION WAS RIGHT
+    if ($connection->connect_errno) {
+      printf("Connection failed: %s\n", $connection->connect_error);
+      exit();
+    }
 
+    if (isset($_SESSION["user"])){
+        $consulta="select nivel_usuario from usuarios where
+    nombre='".$_SESSION["user"]."' and nivel_usuario=1";
+        $result = $connection->query($consulta);
+        $sesion="iniciada";
+    } else {
+        $sesion="cerrada";
+    }
+    
+    
     ?>
 
 <div class="container">
     <div class="cabecera">
         <div class="ini-ses">
             <?php
-                if (!isset($_SESSION["user"])){
+                if ($sesion=="cerrada"){
                     echo "<p class='sesion'><a href='inicio_sesion.php'>Iniciar Sesión</a> | <a href=registro.php>Registrarte</a></p>";
                 } else {
                     $user=$_SESSION["user"];
@@ -50,9 +60,12 @@
         <div class="contacto"><a class='simple' href='administracion.php'><p>Contacto</p></a></div>
         
         <?php
-            if (isset($_SESSION["user"])){
-                echo "<div class='administracion'><a class='simple' href='administracion.php'><p>Administración</p></a></div>";
+            if($sesion=="iniciada"){
+                if ($result->num_rows===0){
+                    echo "<div class='administracion'><a class='simple' href='administracion.php'><p>Administración</p></a></div>";
+                }
             }
+            
         ?>
         
     </div>
