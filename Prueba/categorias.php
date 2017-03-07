@@ -55,7 +55,7 @@
                                     $obj = $result->fetch_object();
                                     $nivel=$obj->nivel_usuario;
                                     if ($nivel==1){
-                                        echo "<li><a href='administracion.phpvvvvvvvvvvvvvvvv'>Administración</a></li>";
+                                        echo "<li><a href='administracion.php'>Administración</a></li>";
                                     }
                                 }
 

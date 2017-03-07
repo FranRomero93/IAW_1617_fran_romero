@@ -58,14 +58,64 @@
                                         echo "<li class='active'><a href='administracion.php'>Administración</a></li>";
                                     }
                                 }
-
+                                unset($result);
+                                unset($obj);
                             ?>
                         </ul>
                 </div>
             </nav> 
         </div>
         <div class="content">
+            <div id="usuarios" class="table-responsive">
+                <h2>Usuarios</h2>
+                <?php
+                    $query="SELECT * from usuarios";
+                    if ($result = $connection->query($query)) {
+                ?>
 
+                    <table class="table table-hover" class="table">
+                        <thead>
+                            <tr>
+                            <th>Id_usuario</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>DNI</th>
+                            <th>Mail</th>
+                            <th>Teléfono</th>
+                            <th>Direccion</th>
+                            <th>Editar</th>
+                            <th>Borrar</th>
+                        </thead>
+                        <tbody>
+
+                        <?php
+                            while($obj = $result->fetch_object()) {
+                                echo "<tr>";
+                                    echo "<td>".$obj->id_usuario."</td>";
+                                    echo "<td>".$obj->nombre."</td>";
+                                    echo "<td>".$obj->apellidos."</td>";
+                                    echo "<td>".$obj->dni."</td>";
+                                    echo "<td>".$obj->email."</td>";
+                                    echo "<td>".$obj->telefono."</td>";
+                                    echo "<td>".$obj->direccion."</td>";
+                                    echo "<td><img src='img/editar.jpg' class='img-responsive' alt='Imagen responsive' width='30pt' height='30pt'></img></td>";
+                                    echo "<td><img src='img/borrar.jpg' class='img-responsive' alt='Imagen responsive' width='30pt' height='30pt'></img></td>";
+                      
+                                echo "</tr>";
+                            }
+
+                            $result->close();
+                            unset($obj);
+                            unset($result);
+                        } 
+
+                        ?>
+                        </tbody>
+                    </table>
+            </div>
+            <div id="">
+                
+            </div>            
         </div>
     </div>
 </body>

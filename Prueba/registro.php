@@ -113,7 +113,7 @@
             $direccion=$_POST["direccion"];
             $password=$_POST["password"];
 
-            $consulta="insert into usuarios (nombre, apellidos, dni, mail, telefono, direccion, password) values ('$user', '$apellidos', '$dni', '$mail', $telefono, '$direccion', md5('$password'));";
+            $consulta="insert into usuarios (nombre, apellidos, dni, email, telefono, direccion, password) values ('$user', '$apellidos', '$dni', '$mail', $telefono, '$direccion', md5('$password'));";
 
 
             if ($result = $connection->query($consulta)) {

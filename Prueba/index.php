@@ -55,7 +55,7 @@
                                     $obj = $result->fetch_object();
                                     $nivel=$obj->nivel_usuario;
                                     if ($nivel==1){
-                                        echo "<li><a href='#'>Administración</a></li>";
+                                        echo "<li><a href='administracion.php'>Administración</a></li>";
                                     }
                                 }
 
@@ -65,7 +65,15 @@
             </nav> 
         </div>
         <div class="content">
-
+            <!--
+            <div class="media">
+                <a href="#" class="pull-left"><img src="imagen.jpg" class="media-object" alt="imagen"></a>
+                <div class="media-body">
+                    <h4 class="media-heading">Jim Carrey <small><i>En Mayo 30, 2014</i></small></h4>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mat        tis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper susc        ipit, posuere a, pede.</p>
+                </div> 
+            </div>
+            -->
         </div>
     </div>
 </body>

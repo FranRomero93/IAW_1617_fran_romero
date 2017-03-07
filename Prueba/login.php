@@ -67,7 +67,7 @@
     
     <?php if (isset($_POST["mail"])) {
                 $consulta="select * from usuarios where
-          mail='".$_POST["mail"]."' and password=md5('".$_POST["password"]."');";
+          email='".$_POST["mail"]."' and password=md5('".$_POST["password"]."');";
                 if ($result = $connection->query($consulta)) {
                     $obj = $result->fetch_object();
                     
