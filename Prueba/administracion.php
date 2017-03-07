@@ -26,13 +26,13 @@
 <body>
     <div class="container background">
         <div id="header" class="header">
-            <h1><a href="index.php">Biblioteca Virtual</a></h1>
+            <h1><a href="index.php">Biblioteca Virtual</a><small> Administración</small></h1>
             <?php
                 if (!isset($_SESSION["user"])){
                     echo "<p class='navbar-text pull-right'><a  href='login.php'>Iniciar Sesión</a> | <a     href=registro.php>Registrarte</a></p>";
                 } else {
                     $user=$_SESSION["user"];
-                    echo "<p class='navbar-text pull-right'>Conectado como <a href='panel-usuario.php' class='navbar-   link'>$user</a> | <a href=logout.php>Cerrar    Sesion</a></p>";
+                    echo "<p class='navbar-text pull-right'>Conectado como <a href='#' class='navbar-   link'>$user</a> | <a href=logout.php>Cerrar    Sesion</a></p>";
                 }
             ?> 
         </div>
@@ -43,7 +43,7 @@
                         <a class="navbar-brand" href="index.php">BV</a>
                     </div>
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.php">Novedades </a></li>
+                            <li><a href="index.php">Novedades </a></li>
                             <li><a href="categorias.php">Categorias</a></li>
                             <li><a href="autores.php">Autores</a></li>
                             <li><a href="contacto.php">Contacto</a></li>
@@ -55,7 +55,7 @@
                                     $obj = $result->fetch_object();
                                     $nivel=$obj->nivel_usuario;
                                     if ($nivel==1){
-                                        echo "<li><a href='#'>Administración</a></li>";
+                                        echo "<li class='active'><a href='administracion.php'>Administración</a></li>";
                                     }
                                 }
 

@@ -26,7 +26,7 @@
 <body>
     <div class="container background">
         <div id="header" class="header">
-            <h1><a href="index.php">Biblioteca Virtual</a><small> Inicio Sesión</small></h1>
+            <h1><a href="index.php">Biblioteca Virtual</a><small> Panel de usuario</small></h1>
         </div>
         <div id="nav-">
             <nav class="navbar navbar-default">

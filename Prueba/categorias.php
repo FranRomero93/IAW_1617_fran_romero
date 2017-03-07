@@ -32,7 +32,7 @@
                     echo "<p class='navbar-text pull-right'><a  href='login.php'>Iniciar Sesión</a> | <a     href=registro.php>Registrarte</a></p>";
                 } else {
                     $user=$_SESSION["user"];
-                    echo "<p class='navbar-text pull-right'>Conectado como <a href='panel-usuario.php' class='navbar-   link'>$user</a> | <a href=logout.php>Cerrar    Sesion</a></p>";
+                    echo "<p class='navbar-text pull-right'>Conectado como <a href='#' class='navbar-   link'>$user</a> | <a href=logout.php>Cerrar    Sesion</a></p>";
                 }
             ?> 
         </div>
@@ -43,8 +43,8 @@
                         <a class="navbar-brand" href="index.php">BV</a>
                     </div>
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.php">Novedades </a></li>
-                            <li><a href="categorias.php">Categorias</a></li>
+                            <li><a href="index.php">Novedades </a></li>
+                            <li class="active"><a href="categorias.php">Categorias</a></li>
                             <li><a href="autores.php">Autores</a></li>
                             <li><a href="contacto.php">Contacto</a></li>
                             <?php                              
@@ -55,7 +55,7 @@
                                     $obj = $result->fetch_object();
                                     $nivel=$obj->nivel_usuario;
                                     if ($nivel==1){
-                                        echo "<li><a href='#'>Administración</a></li>";
+                                        echo "<li><a href='administracion.phpvvvvvvvvvvvvvvvv'>Administración</a></li>";
                                     }
                                 }
 
