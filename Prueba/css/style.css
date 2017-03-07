@@ -31,4 +31,8 @@ content-login {
     height: 600px;
 }
 
+a:link, a:visited, a:hover{  
+    text-decoration:none;  
+}
+
 
