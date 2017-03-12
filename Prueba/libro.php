@@ -43,12 +43,13 @@
                         <a class="navbar-brand" href="index.php">BV</a>
                     </div>
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.php">Novedades </a></li>
+                            <li><a href="index.php">Novedades </a></li>
                             <li><a href="categorias.php">Categorias</a></li>
                             <li><a href="autores.php">Autores</a></li>
                             <?php                              
                                 if(isset($_SESSION["user"])){
-                                    $consulta="select nivel_usuario from usuarios where nombre='".$_SESSION["user"]."'";
+                                    $consulta="select nivel_usuario from usuarios where
+    nombre='".$_SESSION["user"]."'";
                                     $result = $connection->query($consulta);
                                     $obj = $result->fetch_object();
                                     $nivel=$obj->nivel_usuario;
@@ -66,26 +67,37 @@
             </nav> 
         </div>
         <div class="content">
-            <div class=".col-md-8">
-                <?php
-                    $consulta="select * from libro order by fecha_lanzamiento DESC limit 2";
+            <?php
+                 if (isset($_GET["id_libro"])) {
+                    $consulta="select * from libro where id_libro='".$_GET['id_libro']."'";
                     $result = $connection->query($consulta);
-                
-                    while($obj = $result->fetch_object()) {
-                        echo "<div class='libros .col-md-8'>";
-                        echo "<a href='libro.php?id_libro=$obj->id_libro' style='float: left;'><img class='imagen_libro' src='.$obj->imagen'><img></a>";
-                        echo "<a href='libro.php?id_libro=$obj->id_libro'><h4><br>$obj->titulo </a><small><i>$obj->fecha_lanzamiento</i></small></h4>";
-                        echo "<p>$obj->descripcion</p>";
-                        echo "</div>";
+                    $obj = $result->fetch_object();
+                    
+                    $result = $connection->query($consulta);
+                    echo "<div class='libro .col-md-8'>";
+                    echo "<a href='libro.php?' style='float: left;'><img class='imagen_libro_detalles' src='.$obj->imagen'><img></a>";
+                    echo "<a href='libro.php?'><h4><br>$obj->titulo </a><small><i>$obj->fecha_lanzamiento</i></small></h4>";
+                    echo "<p>$obj->descripcion</p>";
+                    echo "<p>Editorial: $obj->editorial</p>";
+                    echo "<p>Fecha_lanzamiento: $obj->fecha_lanzamiento</p>";
+                    echo "<p>Disponibles: $obj->disponibles</p>";
+                    $disponibles=$obj->disponibles;
+                    if ($disponibles>0){
+                        echo "<a href='reserva.php?id_libro=$obj->id_libro'><button class='pull-right' type='button' class='btn btn-default btn-lg btn-block' >Reservar</button></a>";
+                    } else {
+                        echo "No hay disponibles";
                     }
-                ?>
-            </div>
+                    echo "</div>";
+                    echo "</div>";
+                    
+                    $result->close();
+                    unset($obj);
+                    unset($result);
+                } else {
+                    header("Location:index.php");
+                }
+            ?>
         </div>
-        <?php 
-            $result->close();
-            unset($obj);
-            unset($result);
-        ?>
     </div>
 </body>
 </html>

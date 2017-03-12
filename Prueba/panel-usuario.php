@@ -40,28 +40,48 @@
             </nav>
         </div>
         <div class="container">
-            <div class="row">
-		      <div class="col-md-4 col-md-offset-4">
-    		      <div class="panel panel-default">
-			  	      <div class="panel-heading">
-			    	        <h3 class="panel-title">Introduca los datos</h3>
-			 	       </div>
-			  	      <div class="panel-body">
-			    	        <form accept-charset="UTF-8" role="form" method="post">
-                            <fieldset>
-			    	  	     <div class="form-group">
-			    		           <input class="form-control" placeholder="E-mail" name="mail" type="email" required>
-			    		       </div>
-			    		       <div class="form-group">
-			    			      <input class="form-control" placeholder="Password" name="password" type="password" value="" required>
-			    		       </div>
-			    		       <input class="btn btn-lg btn-success btn-block" type="submit" value="login">
-			    	        </fieldset>
-			      	      </form>
-			         </div>
-			     </div>
-		      </div>
-	       </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Datos de usuario</div> 
+                    <?php
+                        $query="SELECT * from usuarios where id_usuario=".$_SESSION["id_usuario"];
+                        if ($result = $connection->query($query)) {
+                    ?>
+                    <table class="table">
+                    <thead>
+                            <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>DNI</th>
+                            <th>Mail</th>
+                            <th>Teléfono</th>
+                            <th>Direccion</th>
+                            <th>Nivel de Usuario</th>
+                        </thead>
+                        <tbody>
+
+                        <?php
+                            while($obj = $result->fetch_object()){
+                                echo "<tr>";
+                                echo "<td><p type='text' >".$obj->nombre."</p></td>";
+                                echo "<td><p type='text' >".$obj->apellidos."</p></td>";
+                                echo "<td><p type='text' >".$obj->dni."</p></td>";
+                                echo "<td><p type='text' >".$obj->email."</p></td>";
+                                echo "<td><p type='text' >".$obj->telefono."</p></td>";
+                                echo "<td><p type='text' >".$obj->direccion."</p></td>";
+                                echo "<td><p type='text' >".$obj->nivel_usuario."</p></td>";
+                                echo "</tr>";
+                            }
+                            
+                            $result->close();
+                            unset($obj);
+                            unset($result);
+                            unset($query);
+                        } 
+
+                        ?>
+                        </tbody>
+                    </table>
+            </div>
         </div>
     </div>
     

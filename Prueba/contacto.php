@@ -32,7 +32,7 @@
                     echo "<p class='navbar-text pull-right'><a  href='login.php'>Iniciar Sesión</a> | <a     href=registro.php>Registrarte</a></p>";
                 } else {
                     $user=$_SESSION["user"];
-                    echo "<p class='navbar-text pull-right'>Conectado como <a href='#' class='navbar-   link'>$user</a> | <a href=logout.php>Cerrar    Sesion</a></p>";
+                    echo "<p class='navbar-text pull-right'>Conectado como <a href='panel-usuario.php' class='navbar-   link'>$user</a> | <a href=logout.php>Cerrar    Sesion</a></p>";
                 }
             ?> 
         </div>

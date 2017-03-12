@@ -78,6 +78,7 @@
                         //VALID LOGIN. SETTING SESSION VARS
                         $_SESSION["mail"]=$_POST["mail"];
                         $_SESSION["user"]=$obj->nombre;
+                        $_SESSION["id_usuario"]=$obj->id_usuario;
                         header("Location: index.php");
                     } 
 

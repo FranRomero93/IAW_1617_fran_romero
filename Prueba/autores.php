@@ -32,7 +32,7 @@
                     echo "<p class='navbar-text pull-right'><a  href='login.php'>Iniciar Sesión</a> | <a     href=registro.php>Registrarte</a></p>";
                 } else {
                     $user=$_SESSION["user"];
-                    echo "<p class='navbar-text pull-right'>Conectado como <a href='#' class='navbar-   link'>$user</a> | <a href=logout.php>Cerrar    Sesion</a></p>";
+                    echo "<p class='navbar-text pull-right'>Conectado como <a href='panel-usuario.php' class='navbar-   link'>$user</a> | <a href=logout.php>Cerrar    Sesion</a></p>";
                 }
             ?> 
         </div>
@@ -46,7 +46,6 @@
                             <li><a href="index.php">Novedades </a></li>
                             <li><a href="categorias.php">Categorias</a></li>
                             <li class="active"><a href="autores.php">Autores</a></li>
-                            <li><a href="contacto.php">Contacto</a></li>
                             <?php                              
                                 if(isset($_SESSION["user"])){
                                     $consulta="select nivel_usuario from usuarios where
@@ -57,6 +56,9 @@
                                     if ($nivel==1){
                                         echo "<li><a href='administracion.php'>Administración</a></li>";
                                     }
+                                    $result->close();
+                                    unset($obj);
+                                    unset($result);
                                 }
 
                             ?>
@@ -65,7 +67,39 @@
             </nav> 
         </div>
         <div class="content">
-
+            <?php
+                 if (isset($_GET["autor"])) {                    
+                    echo "<a href='autores.php' class='pull-right'><p>Volver a autores</p></a>";
+                    echo "<h3>".$_GET['autor']."</h3>";
+                    echo "<div class='.col-md-8'>";
+                    $consulta="select * from libro l inner join autor a ON l.id_autor=a.id_autor where a.nombre='".$_GET["autor"]."'";
+                    $result = $connection->query($consulta);
+                
+                    while($obj = $result->fetch_object()) {
+                        echo "<div class='libros .col-md-8'>";
+                        echo "<a href='libro.php?' style='float: left;'><img class='imagen_libro' src='.$obj->imagen'><img></a>";
+                        echo "<a href='libro.php?'><h4><br>$obj->titulo </a><small><i>$obj->fecha_lanzamiento</i></small></h4>";
+                        echo "<p>$obj->descripcion</p>";
+                        echo "</div>";
+                    }
+                    echo "</div>";;
+                    $result->close();
+                    unset($obj);
+                    unset($result);
+                } else {
+                    $consulta="select * from autor";
+                    $result = $connection->query($consulta);
+                    echo "<ul class='list-unstyled'>";
+                    
+                    while($obj = $result->fetch_object()) {
+                        echo "<a href='autores.php?autor=".$obj->nombre."'><li>".$obj->nombre."  ".$obj->apellidos."</li>";
+                    }
+                    echo "</ul>";
+                    $result->close();
+                    unset($obj);
+                    unset($result);
+                }
+            ?>
         </div>
     </div>
 </body>

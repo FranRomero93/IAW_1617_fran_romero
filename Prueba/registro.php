@@ -124,6 +124,7 @@
               } else {
                 //VALID LOGIN. SETTING SESSION VARS
                 $_SESSION["user"]=$_POST["user"];
+                $_SESSION["id_usuario"]=$obj->id_usuario;
 
                 header("Location: index.php");
               } 
