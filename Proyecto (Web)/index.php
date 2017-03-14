@@ -68,7 +68,7 @@
         <div class="content">
             <div class=".col-md-8">
                 <?php
-                    $consulta="select * from libro order by fecha_lanzamiento DESC limit 2";
+                    $consulta="select * from libro order by fecha_lanzamiento DESC limit 5";
                     $result = $connection->query($consulta);
                 
                     while($obj = $result->fetch_object()) {

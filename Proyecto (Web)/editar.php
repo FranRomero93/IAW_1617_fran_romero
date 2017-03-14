@@ -1,8 +1,9 @@
 <?php
     session_start();
+
     include_once ('library/conexion-bd.php');
 
-    if (empty($_POST)) {
+    if (empty($_POST) and !isset($_SESSION)) {
         
      header("Location: index.php");
         
@@ -51,6 +52,31 @@
             
             if ($result = $connection->query($query)) {
                 header("location:administracion.php");
+            } else {
+                echo"QUERY ERRÓNEO";
+                var_dump($query);
+                var_dump($_POST);
+                var_dump($_GET);
+            }
+        }
+        if (isset($_GET["id_comentario"])){
+            $query="UPDATE comentarios SET contenido='".$_POST['comentario']."' WHERE id_comentario='".$_GET['id_comentario']."';";
+            
+            if ($result = $connection->query($query)) {
+                header("location:administracion.php");
+            } else {
+                echo"QUERY ERRÓNEO";
+                var_dump($query);
+                var_dump($_POST);
+                var_dump($_GET);
+            }
+        }
+        if (isset($_GET["id_prestamo"])){
+            var_dump($_GET["id_prestamo"]);
+            $query="UPDATE prestamo SET fecha_fin='".$_POST['fecha_fin']."' WHERE id_prestamo='".$_GET['id_prestamo']."'";
+            
+            if ($result = $connection->query($query)) {
+                var_dump($query);
             } else {
                 echo"QUERY ERRÓNEO";
                 var_dump($query);

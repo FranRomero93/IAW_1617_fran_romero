@@ -1,5 +1,8 @@
 <?php
-      session_start();
+    session_start();
+    if (!isset($_SESSION)) {
+     header("Location: index.php");
+    }
 ?>
 
 <!doctype html>
@@ -35,6 +38,24 @@
                         <a class="navbar-brand" href="index.php">BV</a>
                     </div>
                         <ul class="nav navbar-nav">
+                            <li><a href="index.php">Novedades </a></li>
+                            <li><a href="categorias.php">Categorias</a></li>
+                            <li><a href="autores.php">Autores</a></li>
+                            <?php                              
+                                if(isset($_SESSION["user"])){
+                                    $consulta="select nivel_usuario from usuarios where nombre='".$_SESSION["user"]."'";
+                                    $result = $connection->query($consulta);
+                                    $obj = $result->fetch_object();
+                                    $nivel=$obj->nivel_usuario;
+                                    if ($nivel==1){
+                                        echo "<li><a href='administracion.php'>Administración</a></li>";
+                                    }
+                                    $result->close();
+                                    unset($obj);
+                                    unset($result);
+                                }
+
+                            ?>
                         </ul>
                 </div>
             </nav>
@@ -44,7 +65,7 @@
                 <div class="panel-heading">Datos de usuario</div> 
                     <?php
                         $query="SELECT * from usuarios where id_usuario=".$_SESSION["id_usuario"];
-                        if ($result = $connection->query($query)) {
+                        $result = $connection->query($query);
                     ?>
                     <table class="table">
                     <thead>
@@ -55,7 +76,6 @@
                             <th>Mail</th>
                             <th>Teléfono</th>
                             <th>Direccion</th>
-                            <th>Nivel de Usuario</th>
                         </thead>
                         <tbody>
 
@@ -68,7 +88,6 @@
                                 echo "<td><p type='text' >".$obj->email."</p></td>";
                                 echo "<td><p type='text' >".$obj->telefono."</p></td>";
                                 echo "<td><p type='text' >".$obj->direccion."</p></td>";
-                                echo "<td><p type='text' >".$obj->nivel_usuario."</p></td>";
                                 echo "</tr>";
                             }
                             
@@ -76,37 +95,46 @@
                             unset($obj);
                             unset($result);
                             unset($query);
-                        } 
+
+                        ?>
+                        </tbody>
+                    </table>
+            </div>
+             
+            <div class="panel panel-default">
+                <div class="panel-heading">Prestamos</div> 
+                    <?php
+                        $query="SELECT * FROM prestamo p INNER JOIN libro l ON p.id_libro=l.id_libro where id_usuario=".$_SESSION["id_usuario"].";";
+                        $result = $connection->query($query)
+                    ?>
+                    <table class="table">
+                    <thead>
+                            <tr>
+                            <th>Libro</th>
+                            <th>Fecha Inicial</th>
+                            <th>Fecha Final</th>
+                        </thead>
+                        <tbody>
+
+                        <?php
+                            while($obj = $result->fetch_object()){
+                                echo "<tr>";
+                                echo "<td><p type='text' >".$obj->titulo."</p></td>";
+                                echo "<td><p type='text' >".$obj->fecha_ini."</p></td>";
+                                echo "<td><p type='text' >".$obj->fecha_fin."</p></td>";
+                                echo "</tr>";
+                            }
+                            
+                            $result->close();
+                            unset($obj);
+                            unset($result);
+                            unset($query);
 
                         ?>
                         </tbody>
                     </table>
             </div>
         </div>
-    </div>
-    
-    <?php if (isset($_POST["mail"])) {
-                $consulta="select * from usuarios where
-          mail='".$_POST["mail"]."' and password=md5('".$_POST["password"]."');";
-                if ($result = $connection->query($consulta)) {
-                    $obj = $result->fetch_object();
-                    
-                    //No rows returned
-                    if ($result->num_rows===0) {
-                        echo "LOGIN INVALIDO";
-                    } else {
-                        //VALID LOGIN. SETTING SESSION VARS
-                        $_SESSION["mail"]=$_POST["mail"];
-                        $_SESSION["user"]=$obj->nombre;
-                        header("Location: index.php");
-                    } 
-
-                }else {
-                    echo "Wrong Query";
-                    var_dump($consulta);
-                }
-            }
-        ?>
-    
+    </div>    
 </body>
 </html>

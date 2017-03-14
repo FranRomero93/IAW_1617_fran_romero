@@ -1,6 +1,9 @@
 <?php
     session_start();
     include_once ('library/conexion-bd.php');
+    if (!isset($_SESSION)) {
+     header("Location: index.php");
+    }
 
     if (empty($_GET)) {
         

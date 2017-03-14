@@ -108,5 +108,17 @@ a:link, a:visited, a:hover{
     padding: 20px;
 }
 
+.comentario {
+    margin: 10px;
+    padding: 10px;
+    background-color: azure;
+    border: solid black 1px;
+}
 
+.libro_detalles p {
+    padding: 10px 20px;
+}
 
+.fecha {
+    width: 150px;
+}

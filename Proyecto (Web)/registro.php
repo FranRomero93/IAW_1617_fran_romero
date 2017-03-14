@@ -41,18 +41,16 @@
                     <div class="navbar-header">
                         <a class="navbar-brand" href="index.php">BV</a>
                     </div>
-                        <ul class="nav navbar-nav">
-                        </ul>
                 </div>
             </nav>
         </div>
         <div class="container">
-        <div class="row centered-form">
-        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-        	<div class="panel panel-default">
-        		<div class="panel-heading">
-			    		<h3 class="panel-title">Regístrese <small>It's free!</small></h3>
-			 			</div>
+            <div class="row centered-form">
+                <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	       <div class="panel panel-default">
+                        <div class="panel-heading">
+			    		   <h3 class="panel-title">Regístrese <small>It's free!</small></h3>
+                        </div>
 			 			<div class="panel-body">
 			    		<form role="form" action="registro.php" method="post">
 			    			<div class="row">
@@ -92,15 +90,9 @@
                             <div class="form-group">
                                 <input type="password" name="password"  class="form-control input-sm" placeholder="Password" required>
                             </div>
-			    			
+			    			<p class="pull-left">Si ya estás registrado, <a href="login.php">Inicia Sesión</a></p>
 			    			<input type="submit" value="Registro" class="btn btn-info btn-block">
 			    		</form>
-			    	</div>
-	    		</div>
-    		</div>
-    	</div>
-    </div>
-    </div>
     
     <?php 
         if (isset($_POST["user"])) {
@@ -117,24 +109,29 @@
 
 
             if ($result = $connection->query($consulta)) {
+                unset($obj);
+                unset($result);
+                
+                $consulta="Select id_usuario from usuarios where email='$mail'";
+                
+                if ($result = $connection->query($consulta)) {
+                    $obj = $result->fetch_object();
+                    $_SESSION["user"]=$_POST["user"];
+                    $_SESSION["id_usuario"]=$obj->id_usuario;
 
-              //No rows returned
-              if ($result->num_rows===0) {
-                echo "REGISTRO INVALIDO";
-              } else {
-                //VALID LOGIN. SETTING SESSION VARS
-                $_SESSION["user"]=$_POST["user"];
-                $_SESSION["id_usuario"]=$obj->id_usuario;
-
-                header("Location: index.php");
-              } 
+                    header("Location: index.php");
+                } 
 
             }else {
-                    echo "Wrong Query";
-                    var_dump($consulta);
+                echo "<p>DATOS INVÁLIDOS</p>";
             }
         }
     ?>
-    
+			    	</div>
+	    		</div>
+    		  </div>
+    	   </div>
+        </div>
+    </div>
 </body>
 </html>

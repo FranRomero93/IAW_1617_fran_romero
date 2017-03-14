@@ -90,8 +90,8 @@
                         <tbody>
 
                         <?php
-                            $i=0;
                             while($obj = $result->fetch_object()) {
+                                $usuario_actual=$obj->id_usuario;
                                 echo "<tr>";
                                 echo "<form action='editar.php?id_usuario='".$obj->id_usuario."' method='post'>";
                                 echo "<td><input type='text' name='nombre' class='combo' value='".$obj->nombre."'></td>";
@@ -102,7 +102,9 @@
                                 echo "<td><input type='text' name='direccion' class='combo_grande' value='".$obj->direccion."'></td>";
                                 echo "<td><input type='text' name='nivel_usuario' class='combo' value='".$obj->nivel_usuario."'></td>";
                                 echo "<td><input type='submit' value='' name='txtName' class='input'></td>";
-                                echo "<td><a href='borrar.php?tabla=usuarios&campo=id_usuario&id=$obj->id_usuario'><img src='img/borrar.jpg' class='img-responsive' alt='Imagen responsive' width='30pt' height='30pt'></img></td>";
+                                if ($_SESSION["id_usuario"]!=$usuario_actual){
+                                    echo "<td><a href='borrar.php?tabla=usuarios&campo=id_usuario&id=$obj->id_usuario'><img src='img/borrar.jpg' class='img-responsive' alt='Imagen responsive' width='30pt' height='30pt'></img></td>";    
+                                }
                                 echo "</form>";
                                 echo "</tr>";
                             }
@@ -162,6 +164,7 @@
                         ?>
                         </tbody>
                     </table>
+                    <p class='pull-left'><a href="insertar_libro.php">Añadir libro</a></p>
             </div> 
             <div id="autor" class="table-responsive">
                 <h2>Autores</h2>
@@ -224,6 +227,85 @@
                                 echo "<td><input type='text' name='nombre_categoria' class='combo' value='".$obj->nombre_categoria."'></td>";
                                 echo "<td><input type='submit' value='' name='txtName' class='input'></td>";
                                 echo "<td><a href='borrar.php?tabla=categoria&campo=id_categoria&id=$obj->id_categoria'><img src='img/borrar.jpg' class='img-responsive' alt='Imagen responsive' width='30pt' height='30pt'></img></td>";
+                                echo "</form>";
+                                echo "</tr>";
+                            }
+
+                            $result->close();
+                            unset($obj);
+                            unset($result);
+                        }
+
+                        ?>
+                        </tbody>
+                    </table>
+            </div>
+            <div id="comentarios" class="table-responsive">
+                <h2>Comentarios</h2>
+                <?php
+                    $query="SELECT * from comentarios c inner join libro l on c.id_libro=l.id_libro";
+                    if ($result = $connection->query($query)) {
+                ?>
+
+                    <table class="table table-hover" class="table">
+                        <thead>
+                            <tr>
+                            <th>Libro</th>
+                            <th>Comentario</th>
+                            <th>Editar</th>
+                            <th>Borrar</th>
+                        </thead>
+                        <tbody>
+
+                        <?php
+                            while($obj = $result->fetch_object()) {
+                                echo "<tr>";
+                                echo "<form action='editar.php?id_comentario='".$obj->id_comentario."' method='post'>";
+                                echo "<td><p type='text'>".$obj->titulo."</p></td>";
+                                echo "<td><input type='text' name='comentario' class='combo_grande descripcion' value='".$obj->contenido."'></td>";
+                                echo "<td><input type='submit' value='' name='txtName' class='input'></td>";
+                                echo "<td><a href='borrar.php?tabla=comentarios&campo=id_categoria&id=$obj->id_categoria'><img src='img/borrar.jpg' class='img-responsive' alt='Imagen responsive' width='30pt' height='30pt'></img></td>";
+                                echo "</form>";
+                                echo "</tr>";
+                            }
+
+                            $result->close();
+                            unset($obj);
+                            unset($result);
+                        }
+
+                        ?>
+                        </tbody>
+                    </table>
+            </div>
+            <div id="prestamos" class="table-responsive">
+                <h2>Prestamos</h2>
+                <?php
+                    $query="SELECT * from prestamo p inner join usuarios u on p.id_usuario=u.id_usuario inner join libro l on p.id_libro=l.id_libro";
+                    if ($result = $connection->query($query)) {
+                ?>
+
+                    <table class="table table-hover" class="table">
+                        <thead>
+                            <tr>
+                            <th>Usuario</th>
+                            <th>Libro prestado</th>
+                            <th>Fecha final</th>
+                            <th>Editar</th>
+                            <th>Borrar</th>
+                        </thead>
+                        <tbody>
+
+                        <?php
+                            while($obj = $result->fetch_object()) {
+                                $id=$obj->id_prestamo;
+                                echo "<tr>";
+                                echo "<form action='editar.php?id_prestamo='$id' method='post'>";
+                                echo "<td><p type='text'>".$obj->nombre."</p></td>";
+                                echo "<td><p type='text'>".$obj->titulo."</p></td>";
+                                echo "<td><input type='date' name='fecha_fin' class='combo fecha' value='".$obj->fecha_fin."'></td>";
+                                echo "<td><input type='submit' value='' name='txtName' class='input'></td>";
+                                echo "<td><a href='borrar.php?tabla=prestamo&campo=id_prestamo&id=$obj->id_prestamo'><img src='img/borrar.jpg' class='img-responsive' alt='Imagen responsive' width='30pt' height='30pt'></img></td>";
                                 echo "</form>";
                                 echo "</tr>";
                             }

@@ -48,8 +48,7 @@
                             <li><a href="autores.php">Autores</a></li>
                             <?php                              
                                 if(isset($_SESSION["user"])){
-                                    $consulta="select nivel_usuario from usuarios where
-    nombre='".$_SESSION["user"]."'";
+                                    $consulta="select nivel_usuario from usuarios where nombre='".$_SESSION["user"]."'";
                                     $result = $connection->query($consulta);
                                     $obj = $result->fetch_object();
                                     $nivel=$obj->nivel_usuario;
@@ -77,8 +76,8 @@
                 
                     while($obj = $result->fetch_object()) {
                         echo "<div class='libros .col-md-8'>";
-                        echo "<a href='libro.php?' style='float: left;'><img class='imagen_libro' src='.$obj->imagen'><img></a>";
-                        echo "<a href='libro.php?'><h4><br>$obj->titulo </a><small><i>$obj->fecha_lanzamiento</i></small></h4>";
+                        echo "<a href='libro.php?id_libro=$obj->id_libro' style='float: left;'><img class='imagen_libro' src='.$obj->imagen'><img></a>";
+                        echo "<a href='libro.php?id_libro=$obj->id_libro'><h4><br>$obj->titulo </a><small><i>$obj->fecha_lanzamiento</i></small></h4>";
                         echo "<p>$obj->descripcion</p>";
                         echo "</div>";
                     }

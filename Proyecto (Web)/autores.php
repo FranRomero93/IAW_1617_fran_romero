@@ -48,8 +48,7 @@
                             <li class="active"><a href="autores.php">Autores</a></li>
                             <?php                              
                                 if(isset($_SESSION["user"])){
-                                    $consulta="select nivel_usuario from usuarios where
-    nombre='".$_SESSION["user"]."'";
+                                    $consulta="select nivel_usuario from usuarios where nombre='".$_SESSION["user"]."'";
                                     $result = $connection->query($consulta);
                                     $obj = $result->fetch_object();
                                     $nivel=$obj->nivel_usuario;
